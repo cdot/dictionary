@@ -1,0 +1,9 @@
+{
+	"name": "@cdot/dictionary",
+	"description": "Dictionaries using directed acyclic word graphs",
+	"author": {
+		"name": "Crawford Currie",
+		"url": "https://github.com/cdot"
+	},
+	"license": "MIT"
+}
