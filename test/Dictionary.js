@@ -97,4 +97,21 @@ describe("Dictionary", () => {
     assert.equal(s[1].postNodes.length, 0);
     assert.deepEqual(s[1].postLetters.length, 0);
   });
+
+  it("hangmen", () => {
+    return Fs.readFile(`${__dirname}/data/dictionary.dict`)
+    .then(data => new Dictionary("test").loadDAWG(data.buffer))
+    .then(dic => {
+      assert.deepEqual(
+        dic.findHangmen("H NGM N"),
+        [ 'HANGMAN', 'HANGMEN', 'HUNGMAN', 'HUNGMEN' ] );
+      assert.deepEqual(
+        dic.findHangmen("H NGMEN"),
+        [ 'HANGMEN', 'HUNGMEN' ]
+      );
+      assert.deepEqual(
+        dic.findHangmen("H NGMENS"),
+        []);
+    });
+  });
 });

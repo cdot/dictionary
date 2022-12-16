@@ -36,7 +36,7 @@ class Explorer {
    */
   static anagrams(dictionary, words, report) {
     if (!words || words.length === 0)
-      throw "Need letters to find anagrams of";
+      throw Error("Need letters to find anagrams of");
 
     for (const w of words) {
       let anag = Object.keys(dictionary.findAnagrams(w.replace(/\./g, " ")));
@@ -47,16 +47,33 @@ class Explorer {
   }
 
   /**
-   * Find anagrams of the letters of the words, including
-   * sub-sequences of the letters e.g. `QI` is a sequence of the letters
-   * in `QUIET`.
+   * Find words that hangman match all the letters. `.`
+   * works as a character wildcard.
+   * @param {Dictionary} dictionary dawg to explore
+   * @param {string[]?} words list of words to check
+   * @param {function} report reporter function, same signature as console.log
+   */
+  static hangmen(dictionary, words, report) {
+    if (!words || words.length === 0)
+      throw Error("Need letters to find hangman matches for");
+
+    for (const w of words) {
+      const matches =
+            dictionary.findHangmen(w.replace(/\./g, " "));
+      matches.forEach(w => report(w));
+    }
+  }
+
+  /**
+   * Find arrangements of the letters in the words e.g. `UIE` is a
+   * an arrangement of the letters in `QUIET`, as is `EIU` and `IUE`.
    * @param {Dictionary} dictionary dawg to explore
    * @param {string[]?} words list of words to check
    * @param {function} report reporter function, same signature as console.log
    */
   static arrangements(dictionary, words, report) {
     if (!words || words.length === 0)
-      throw "Need letters to find anagrams of";
+      throw Error("Need letters to find arrangements of");
 
     for (const w of words) {
       let anag = Object.keys(dictionary.findAnagrams(w));

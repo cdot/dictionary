@@ -10,12 +10,12 @@
  * @module
  */
 import fs from "fs";
-import getopt  from "posix-getopt";
+import getopt from "posix-getopt";
 import path from "path";
 const Fs = fs.promises;
 
-import { Dictionary } from "../src/js";
-import { Explorer } from "../src/js";
+import { Dictionary } from "../src/Dictionary.js";
+import { Explorer } from "../src/Explorer.js";
 
 const DESCRIPTION = [
   "USAGE",
@@ -28,7 +28,11 @@ const DESCRIPTION = [
   "\te.g. `node explore.js dictionaries/CSW2019_English.dict list`",
   "\tThe following actions are available:",
   "\tanagrams",
-  "\t\tFind anagrams of the words that use all the letters.",
+  "\t\tFind anagrams of the words that use all the letters. '.' acts as a",
+  "\t\twildcard, matching any letter.",
+  "\thangmen",
+  "\t\tList words that match the letters with the characters in the right",
+  "\t\tplaces. '.' acts as a wildcard for unknown characters.",
   "\tarrangements",
   "\t\tFind anagrams of the letters of the words, including",
   "\t\tsub-sequences of the letters e.g. `LED` is a sequence",
@@ -79,7 +83,8 @@ getWords
   if (dir === ".") dir = undefined;
   const dict = path.basename(dawg, ".dict");
   console.log(dict, action, words);
-  return Dictionary.load(dict, dir)
+  return Fs.readFile(dawg)
+  .then(data => new Dictionary(dawg).loadDAWG(data.buffer))
   .then(dictionary =>
         Explorer[action].call(null, dictionary, words, console.log));
 });

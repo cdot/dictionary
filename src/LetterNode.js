@@ -256,11 +256,11 @@ class LetterNode {
   }
 
   /**
-   * Return the LetterNode that matches the last character
-   * in chars, even if it"s not isEndOfWord
+   * Find the letter node at the end of the subtree that matches
+   * the last character in chars, even if it"s not isEndOfWord
    * @param {string} chars a string of characters that may
    * be the root of a word
-   * @param {number} index the start index within partialWord
+   * @param {number} index index into chars
    * @return {LetterNode} node found, or undefined
    */
   match(chars, index) {
@@ -276,6 +276,31 @@ class LetterNode {
       node = node.next;
     }
     return null;
+  }
+
+  /**
+   * Find all words below this node that match the character sequence
+   * passed from a given point in the sequence.
+   * " " acts as a wildcard.
+   * @param {string} chars the character sequence to match
+   * @param {number} index index into chars
+   * @param {string} word word asembled so far
+   * @param {string[]} list list of words found
+   */
+  hangmen(chars, index, word, list) {
+    let node = this;
+    const ci = chars[index];
+    while (node) {
+      if (ci === " " || node.letter === ci) {
+        if (node.isEndOfWord && index === chars.length - 1)
+          list.push(word + node.letter);
+        if (index < chars.length - 1 && node.child)
+          node.child.hangmen(
+            chars, index + 1, word + node.letter, list);
+      }
+      node = node.next;
+    }
+    
   }
 
   /**

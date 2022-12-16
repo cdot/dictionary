@@ -93,5 +93,8 @@
 			"quotes": 0,
 			"strict": 0
 		}
+	},
+	"dependencies": {
+		"posix-getopt": "^1.2.1"
 	}
 }

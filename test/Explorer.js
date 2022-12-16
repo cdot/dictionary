@@ -14,7 +14,8 @@ describe("Explorer", () => {
     "PYGMY", "SMALL", "DINKY", "DWARFISH", "INSIGNIFICANT", "PUNY",
     "UNDERSIZED", "BIG", "BULKY", "BUMPER", "CONSIDERABLE",
     "EXTENSIVE", "EWE", "GOOD", "GOODLY", "GRAND", "GREAT", "GROSS",
-    "HANDSOME", "HEFTY", "HULKING", "JUMBO", "LARGE", "LARGISH",
+    "HANDSOME", "HANGMAN", "HANGMEN", "HEFTY", "HULKING", "JUMBO",
+    "LARGE", "LARGISH",
     "MAJOR", "OUTSIZED", "OVERGROWN", "OVERSCALE", "OVERSIZED",
     "SIZEABLE", "SUBSTANTIAL", "SUPER", "WHACKING", "WHOPPING",
     "FORMIDABLE", "GRANDIOSE", "IMPOSING", "LOFTY", "MAJESTIC",
@@ -70,5 +71,13 @@ describe("Explorer", () => {
     Explorer.arrangements(dictionary, ["WEENSY"], w => ws.push(w));
     assert.deepEqual(["3 words found in \"WEENSY\":",
                       "EWE", "WEE", "WEENSY"], ws);
+  });
+
+  it("hangmen", () => {
+    const ws = [];
+    const dictionary = loadict();
+    Explorer.hangmen(dictionary, ["H.NG..N"], w => ws.push(w));
+
+    assert.deepEqual(["HANGMAN", "HANGMEN"], ws);
   });
 });
