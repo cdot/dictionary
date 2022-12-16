@@ -7,6 +7,7 @@ Supports:
 * hangman matching (words with letters in known positions)
 * determining if a particular sequence of letters occurs in any word
   in the dictionary.
+* node.js and browsers
 
 For an illustration of how it can be used, run
 ```
