@@ -10,7 +10,7 @@ const config = {
     path: `${__dirname}/../dist/amd`,
     globalObject: "this",
     library: {
-      name: "cbor",
+      name: "dictionary",
       type: "amd"
     }
   },
