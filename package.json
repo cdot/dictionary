@@ -20,9 +20,9 @@
 	"files": [
 		"package.json",
 		"README.md",
-		"dist/package.json",
-		"dist/index.js",
-		"src/*.js",
+		"dist/*/*.js",
+		"dist/*/*.json",
+	    "src/*.js",
 		"bin/*.js"
 	],
 	"author": {
