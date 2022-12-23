@@ -25,7 +25,7 @@ const DESCRIPTION = [
   "\nDESCRIPTION",
   "\tExplore a DAWG dictionary, <dictionary> is a file path to a",
   "\t.dict file.",
-  "\te.g. `node explore.js dictionaries/CSW2019_English.dict list`",
+  `\te.g. node ${process.argv[1]} CSW2019_English.dict list`,
   "\tThe following actions are available:",
   "\tanagrams",
   "\t\tFind anagrams of the words that use all the letters. '.' acts as a",
@@ -79,12 +79,14 @@ if (options.file) {
 getWords
 .then(words => words.map(w => w.toUpperCase()))
 .then(words => {
-  let dir  = path.dirname(dawg);
-  if (dir === ".") dir = undefined;
-  const dict = path.basename(dawg, ".dict");
-  console.log(dict, action, words);
+  console.log(dawg, action, words);
   return Fs.readFile(dawg)
   .then(data => new Dictionary(dawg).loadDAWG(data.buffer))
+  .catch(e => {
+    console.error(`Failed to read dictionary ${dawg}: ${e}`);
+    console.error(DESCRIPTION);
+    process.exit();
+  })
   .then(dictionary =>
         Explorer[action].call(null, dictionary, words, console.log));
 });
