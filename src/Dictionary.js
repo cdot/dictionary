@@ -10,6 +10,7 @@ import { LetterNode } from "./LetterNode.js";
  * represent code points. To use this dictionary you also need an
  * alphabet of code points sorted in the same order as that used to
  * generate the DAWG.
+ * @class Dictionary
  */
 class Dictionary {
 
@@ -21,9 +22,8 @@ class Dictionary {
   static cache = [];
 
   /**
-   name of the dictionary
-   * It's actually an array of little-endian 4-byte integers.
-   * Note that this constructor is private.
+   * @param {string} name of the dictionary
+   * @private
    */
   constructor(name) {
     /**
@@ -56,7 +56,6 @@ class Dictionary {
    * discarded.
    * @param {(Buffer|Array)?} data the DAWG data.
    * @return {Dictionary} this
-   * @private
    */
   loadDAWG(data) {
     const dv = new DataView(data);
@@ -121,7 +120,7 @@ class Dictionary {
 
   /**
    * Check if a word is in the dictionary
-   * @param {string`chars a word to check
+   * @param {string} chars a word to check
    * @return {boolean} true if the word is found, false otherwise
    */
   hasWord(chars) {
@@ -154,9 +153,12 @@ class Dictionary {
   }
 
   /** 
-   * Find hangman matches for set of letters.
+   * Find hangman matches for a set of letters. A hangman match is any
+   * word(s) that match against an ordered set of letters, using a space
+   * for an any-letter wildcard. For example, "EXAMPLE" is a hangman match
+   * for "E AM LE".
    * @param {string} theChars the letters, ' ' for an any-letter wildcard.
-   * @return {string[]} a list of words that matched.
+   * @return {string[]} the list of words that matched.
    */
   findHangmen(theChars) {
     theChars = theChars.toUpperCase();
@@ -188,6 +190,8 @@ class Dictionary {
    * are all those nodes that represent the character in any word.
    * From a sequence root we can follow post or pre to extend the
    * word in either direction.
+   * @param {string} ch character to find roots for
+   * @return {LetterNode[]} list of the roots
    */
   getSequenceRoots(ch) {
     if (!this.sequenceRoots)
