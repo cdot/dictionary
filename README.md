@@ -27,4 +27,4 @@ $ node node_modules/@cdot/dictionary/bin/compress.js
 ```
 
 ## API
-See [here](doc/index.html) for the full API.
+See [here](https://cdot.github.io/dictionary/doc/index.html) for the full API.
