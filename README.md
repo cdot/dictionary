@@ -27,4 +27,4 @@ $ node node_modules/@cdot/dictionary/bin/compress.js
 ```
 
 ## API
-Clone the repository and run `npm run doc` to generate the API documentation.
+See [here](doc/index.html) for the full API.
