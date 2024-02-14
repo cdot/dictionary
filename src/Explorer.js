@@ -126,9 +126,10 @@ class Explorer {
         root.node.child.eachWord(root.word, w => list.push(w));
 
         list = list.filter(w => !biglist[w]);
-        list.forEach(w => biglist[w] = true);
-
-        report(list.map(w => report(w)));
+        list.forEach(w => {
+          biglist[w] = true;
+          report(w);
+        });
       }
     });
   }

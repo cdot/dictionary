@@ -24,7 +24,7 @@ describe("Explorer", () => {
     "ASTRONOMICAL", "COLOSSAL", "COSMIC", "ELEPHANTINE", "ENORMOUS",
     "GIANT", "GIGANTIC", "HERCULEAN", "HEROIC", "HUGE", "IMMENSE",
     "WEED", "MAMMOTH", "MASSIVE", "MONSTER", "MONSTROUS",
-    "MONUMENTAL", "MOUNTAINOUS", "PLANETARY", "PRODIGIOUS", "TITANIC",
+    "MONUMENTAL", "MOUNTAINOUS", "PLANETARY", "PRODIGIOUS", "SWEET", "TITANIC",
     "TREMENDOUS"
   ].sort();
 
@@ -47,7 +47,7 @@ describe("Explorer", () => {
     const dictionary = loadict();
     const ws = [];
     Explorer.list(dictionary, ["WEE"], w => ws.push(w));
-    assert.equal("WEE -- WEED\nWEE -- WEENSY", ws.join(""));
+    assert.deepEqual(ws, ["WEED", "WEENSY"]);
   });
 
   it("anagrams", () => {
@@ -61,7 +61,7 @@ describe("Explorer", () => {
     const dictionary = loadict();
     const ws = [];
     Explorer.sequences(dictionary, ["WEE", "CUTE"], w => ws.push(w));
-    assert.deepEqual(["Valid sequences:", "WEE"], ws);
+    assert.deepEqual(["WEE"], ws);
   });
 
   it("arrangements", () => {
