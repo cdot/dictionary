@@ -54,8 +54,7 @@ describe("Explorer", () => {
     const dictionary = loadict();
     const ws = [];
     Explorer.anagrams(dictionary, ["WEE"], w => ws.push(w));
-    assert.deepEqual(["2 words found in \"WEE\":",
-                      "EWE", "WEE"], ws);
+    assert.deepEqual(["EWE", "WEE"], ws);
   });
 
   it("sequences", () => {
@@ -69,8 +68,7 @@ describe("Explorer", () => {
     const dictionary = loadict();
     const ws = [];
     Explorer.arrangements(dictionary, ["WEENSY"], w => ws.push(w));
-    assert.deepEqual(["3 words found in \"WEENSY\":",
-                      "EWE", "WEE", "WEENSY"], ws);
+    assert.deepEqual(["EWE", "WEE", "WEENSY"], ws);
   });
 
   it("hangmen", () => {

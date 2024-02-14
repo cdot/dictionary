@@ -14,13 +14,15 @@ class Explorer {
    * isn't.
    * @param {Dictionary} dictionary dawg to explore
    * @param {string[]?} words list of words to check
-   * @param {function} report reporter function, same signature as console.log
+   * @param {function} report reporter function(word). This function
+   * will be called each time a matching word is found, passing the word
+   * as a string.
    */
   static sequences(dictionary, words, report) {
     if (!(dictionary instanceof Dictionary))
       throw Error("Not a Dictionary");
     const valid = [];
-    report(`Valid sequences:`);
+    //report(`Valid sequences:`);
     for (let w of words) {
       if (dictionary.hasSequence(w))
         report(w);
@@ -32,7 +34,9 @@ class Explorer {
    * works as a character wildcard.
    * @param {Dictionary} dictionary dawg to explore
    * @param {string[]?} words list of words to check
-   * @param {function} report reporter function, same signature as console.log
+   * @param {function} report reporter function(word). This function
+   * will be called each time a matching word is found, passing the word
+   * as a string.
    */
   static anagrams(dictionary, words, report) {
     if (!words || words.length === 0)
@@ -41,7 +45,7 @@ class Explorer {
     for (const w of words) {
       let anag = Object.keys(dictionary.findAnagrams(w.replace(/\./g, " ")));
       anag = anag.filter(word => word.length === w.length);
-      report(`${anag.length} words found in "${w}":`);
+      //report(`${anag.length} words found in "${w}":`);
       anag.forEach(w => report(w));
     }
   }
@@ -51,7 +55,9 @@ class Explorer {
    * works as a character wildcard.
    * @param {Dictionary} dictionary dawg to explore
    * @param {string[]?} words list of words to check
-   * @param {function} report reporter function, same signature as console.log
+   * @param {function} report reporter function(word). This function
+   * will be called each time a matching word is found, passing the word
+   * as a string.
    */
   static hangmen(dictionary, words, report) {
     if (!words || words.length === 0)
@@ -69,7 +75,9 @@ class Explorer {
    * an arrangement of the letters in `QUIET`, as is `EIU` and `IUE`.
    * @param {Dictionary} dictionary dawg to explore
    * @param {string[]?} words list of words to check
-   * @param {function} report reporter function, same signature as console.log
+   * @param {function} report reporter function(word). This function
+   * will be called each time a matching word is found, passing the word
+   * as a string.
    */
   static arrangements(dictionary, words, report) {
     if (!words || words.length === 0)
@@ -77,7 +85,7 @@ class Explorer {
 
     for (const w of words) {
       let anag = Object.keys(dictionary.findAnagrams(w));
-      report(`${anag.length} words found in "${w}":`);
+      //report(`${anag.length} words found in "${w}":`);
       anag.forEach(w => report(w));
     }
   }
@@ -87,7 +95,9 @@ class Explorer {
    * list all dictionary entries that start with one of the words.
    * @param {Dictionary} dictionary dawg to explore
    * @param {string[]?} words list of words to check
-   * @param {function} report reporter function, same signature as console.log
+   * @param {function} report reporter function(word). This function
+   * will be called once for each word in the dictionary.
+   * as a string.
    */
   static list(dictionary, words, report) {
     if (!words || words.length === 0) {
@@ -118,7 +128,7 @@ class Explorer {
         list = list.filter(w => !biglist[w]);
         list.forEach(w => biglist[w] = true);
 
-        report(list.map(w => `${root.word} -- ${w}`).join("\n"));
+        report(list.map(w => report(w)));
       }
     });
   }
