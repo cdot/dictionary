@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: 16
       - run: npm install
+      - run: npm build
       - run: npm test
       - run: npx webpack
       - uses: JS-DevTools/npm-publish@v1
