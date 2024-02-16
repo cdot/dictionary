@@ -1,6 +1,6 @@
 {
 	"name": "@cdot/dictionary",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Dictionaries using directed acyclic word graphs",
 	"type": "module",
 	"main": "./dist/cjs/index.js",
